@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-// import { tmdbApi } from "../services";
 import { default as TmdbReducer } from "./tmdb";
 
 export const store = configureStore({

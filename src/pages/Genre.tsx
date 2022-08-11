@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
-import { Text, createStyles, SimpleGrid, Card } from "@mantine/core";
-import { Link, useParams } from "react-router-dom";
+import { Text } from "@mantine/core";
+import { useParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../store";
-import { fetchGenres, selectGenreById, fetchMoviesByGenreId } from "../store/tmdb";
-
-const useStyles = createStyles({});
+import { fetchGenres, selectGenreById } from "../store/tmdb";
 
 function Genre() {
-  const { classes } = useStyles();
   const dispatch = useAppDispatch();
   const { genreId = "" } = useParams();
   const genre = useAppSelector((state) => selectGenreById(state, genreId));
