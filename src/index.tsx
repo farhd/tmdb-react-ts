@@ -1,16 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import Router from "./Router";
+import reportWebVitals from "./reportWebVitals";
+import { Provider as ReduxProvider } from "react-redux";
+import { HelmetProvider } from "react-helmet-async";
+import { store } from "./store";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // <React.StrictMode>
+  <ReduxProvider store={store}>
+    <HelmetProvider>
+      <Router />
+    </HelmetProvider>
+  </ReduxProvider>,
+  // </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
