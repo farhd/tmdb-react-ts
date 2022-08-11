@@ -1,3 +1,15 @@
+# Requirements
+
+In order to run this application, an API-key for "The Movie Database" is needed.
+
+1. Get one from [TMDB](https://developers.themoviedb.org/3/getting-started/introduction).
+
+2. Create an .env file in the root project folder
+
+3. Add your API-key to that .env file:
+
+`REACT_APP_TMDB_API_KEY=your_api_key_for_tmdb`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
