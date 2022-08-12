@@ -1,6 +1,11 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, EntityState } from "@reduxjs/toolkit";
 import { RootState } from ".";
-import { apiFetchGenres, apiFetchMoviesByGenreId, apiFetchMovieById } from "../services/tmdb";
+import {
+  apiFetchGenres,
+  apiFetchMoviesByGenreId,
+  apiFetchMovieById,
+  apiSearchMovies,
+} from "../services/tmdb";
 
 export const fetchGenres = createAsyncThunk("tmdb/fetchGenres", apiFetchGenres);
 export const fetchMoviesByGenreId = createAsyncThunk(
@@ -8,6 +13,7 @@ export const fetchMoviesByGenreId = createAsyncThunk(
   apiFetchMoviesByGenreId,
 );
 export const fetchMovieById = createAsyncThunk("tmdb/fetchMovieById", apiFetchMovieById);
+export const searchMovie = createAsyncThunk("tmdb/searchMovie", apiSearchMovies);
 
 export type Genre = {
   id: string;

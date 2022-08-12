@@ -20,12 +20,13 @@ export const apiFetchGenres = async () => {
   return data;
 };
 
-type ApiFetchMoviesByGenreResponse = {
+type ListResult<T> = {
   page: number;
-  results: Movie[];
+  results: T[];
   total_pages: number;
   total_results: number;
 };
+type ApiFetchMoviesByGenreResponse = ListResult<Movie>;
 interface ApiFetchMoviesByGenreId {
   genreId: Genre["id"];
   page: number;
@@ -44,5 +45,20 @@ export const apiFetchMoviesByGenreId = async ({ genreId, page }: ApiFetchMoviesB
 type ApiFetchMoviesByIdResponse = MovieFull;
 export const apiFetchMovieById = async (movieId: Movie["id"]) => {
   const { data } = await tmdbApi.get<ApiFetchMoviesByIdResponse>(`/movie/${movieId}`, {});
+  return data;
+};
+
+type ApiSearchMoviesResponse = ListResult<Movie>;
+interface ApiSearchMovies {
+  query: string;
+  page?: number;
+}
+export const apiSearchMovies = async ({ query = "", page }: ApiSearchMovies) => {
+  const { data } = await tmdbApi.get<ApiSearchMoviesResponse>("/search/movie", {
+    params: {
+      query,
+      page: page ?? 1,
+    },
+  });
   return data;
 };

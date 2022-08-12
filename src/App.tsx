@@ -1,23 +1,13 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, Outlet } from "react-router-dom";
-import {
-  MantineProvider,
-  Anchor,
-  createStyles,
-  Stack,
-  Center,
-  TextInput,
-  Space,
-} from "@mantine/core";
+import { MantineProvider, Anchor, createStyles, Stack, Center, Space } from "@mantine/core";
+import TextSearch from "./components/TextSearch";
 
 const useStyles = createStyles({
   main: {
     maxWidth: 800,
     width: "100%",
-  },
-  input: {
-    minWidth: 300,
   },
 });
 
@@ -36,8 +26,7 @@ function App() {
             <Anchor align="center" m="md" component={Link} to="/">
               The Movie Database
             </Anchor>
-            <TextInput label="Search" className={classes.input} placeholder="Enter movie title" />
-
+            <TextSearch />
             <Space h="sm" />
             <Outlet />
             <Space h="xl" />
