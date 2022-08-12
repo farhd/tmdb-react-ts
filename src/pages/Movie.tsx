@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Text, createStyles, Group, Grid, Container, Center } from "@mantine/core";
+import { Text, createStyles } from "@mantine/core";
 
 import { useAppDispatch, useAppSelector } from "../store";
 import { fetchMovieById, selectSelectedMovie } from "../store/tmdb";
@@ -29,6 +29,7 @@ function Movie() {
 
   return (
     <>
+      <Text>Movie</Text>
       {movie ? (
         <div className={classes.movie}>
           <MovieProperty name="Title" value={movie?.title} />

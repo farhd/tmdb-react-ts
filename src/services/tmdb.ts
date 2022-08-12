@@ -26,10 +26,15 @@ type ApiFetchMoviesByGenreResponse = {
   total_pages: number;
   total_results: number;
 };
-export const apiFetchMoviesByGenreId = async (genreId: Genre["id"]) => {
+interface ApiFetchMoviesByGenreId {
+  genreId: Genre["id"];
+  page: number;
+}
+export const apiFetchMoviesByGenreId = async ({ genreId, page }: ApiFetchMoviesByGenreId) => {
   const { data } = await tmdbApi.get<ApiFetchMoviesByGenreResponse>("/discover/movie", {
     params: {
       with_genres: genreId,
+      page: page ?? 1,
       sort_by: "original_title.asc",
     },
   });

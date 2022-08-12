@@ -1,10 +1,4 @@
-import {
-  createAsyncThunk,
-  createEntityAdapter,
-  createSelector,
-  createSlice,
-  EntityState,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createEntityAdapter, createSlice, EntityState } from "@reduxjs/toolkit";
 import { RootState } from ".";
 import { apiFetchGenres, apiFetchMoviesByGenreId, apiFetchMovieById } from "../services/tmdb";
 
@@ -93,8 +87,9 @@ const slice = createSlice({
         genresAdapter.addMany(state.genres, payload.genres);
       })
       .addCase(fetchMoviesByGenreId.fulfilled, (state, { payload }) => {
+        moviesAdapter.removeAll(state.movies);
         const movies = payload?.results;
-        moviesAdapter.addMany(state.movies, movies);
+        moviesAdapter.setMany(state.movies, movies);
       })
       .addCase(fetchMovieById.pending, (state) => {
         state.selectedMovie = null;

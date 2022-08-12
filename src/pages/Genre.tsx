@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Text, createStyles, SimpleGrid, Card, Anchor } from "@mantine/core";
+import { Text, createStyles, SimpleGrid, Card, Anchor, Pagination, Space } from "@mantine/core";
 
 import { useAppDispatch, useAppSelector } from "../store";
 import { fetchMoviesByGenreId, selectGenreById, selectMoviesByGenreId } from "../store/tmdb";
@@ -20,10 +20,16 @@ function Genre() {
   const { genreId = "" } = useParams();
   const genre = useAppSelector((state) => selectGenreById(state, genreId));
   const movies = useAppSelector((state) => selectMoviesByGenreId(state, genreId));
+  const [activePage, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    dispatch(fetchMoviesByGenreId(genreId));
-  }, [dispatch, genreId]);
+    dispatch(fetchMoviesByGenreId({ genreId, page: activePage }))
+      .unwrap()
+      .then(({ total_pages = 0 }) => {
+        setTotalPages(total_pages <= 500 ? totalPages : 500); // TMDB accepts max 500 for page-query
+      });
+  }, [dispatch, genreId, activePage, totalPages]);
 
   return (
     <>
@@ -40,6 +46,10 @@ function Genre() {
           </div>
         ))}
       </SimpleGrid>
+      <Space h="xs" />
+      {totalPages > 0 ? (
+        <Pagination page={activePage} onChange={setPage} total={totalPages} />
+      ) : null}
     </>
   );
 }
