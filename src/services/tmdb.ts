@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Genre, Movie } from "../store/tmdb";
+import { Genre, Movie, MovieFull } from "../store/tmdb";
 
 const tmdbApiBase = "https://api.themoviedb.org/3";
 const tmdbApiKey = process.env.REACT_APP_TMDB_API_KEY;
@@ -33,5 +33,11 @@ export const apiFetchMoviesByGenreId = async (genreId: Genre["id"]) => {
       sort_by: "original_title.asc",
     },
   });
+  return data;
+};
+
+type ApiFetchMoviesByIdResponse = MovieFull;
+export const apiFetchMovieById = async (movieId: Movie["id"]) => {
+  const { data } = await tmdbApi.get<ApiFetchMoviesByIdResponse>(`/movie/${movieId}`, {});
   return data;
 };

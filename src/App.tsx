@@ -1,7 +1,15 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, Outlet } from "react-router-dom";
-import { MantineProvider, Anchor, createStyles, Stack, Center, TextInput } from "@mantine/core";
+import {
+  MantineProvider,
+  Anchor,
+  createStyles,
+  Stack,
+  Center,
+  TextInput,
+  Space,
+} from "@mantine/core";
 
 const useStyles = createStyles({
   main: {
@@ -30,7 +38,9 @@ function App() {
             </Anchor>
             <TextInput label="Search" className={classes.input} placeholder="Enter movie title" />
 
+            <Space h="sm" />
             <Outlet />
+            <Space h="xl" />
           </Stack>
         </Center>
       </MantineProvider>
